@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etTelp;
     Spinner spUkuran;
     CheckBox cbInternet, cbCuci, cbMakan;
+    RadioGroup rgJK;
     Button bOk;
     TextView tvHasil;
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         cbInternet = (CheckBox) findViewById(R.id.checkBoxInternet);
         cbCuci = (CheckBox) findViewById(R.id.checkBoxCuci);
         cbMakan = (CheckBox) findViewById(R.id.checkBoxMakan);
+        rgJK = (RadioGroup) findViewById(R.id.radioGroupJenisKelamin);
         bOk = (Button) findViewById(R.id.buttonOk);
         tvHasil = (TextView) findViewById(R.id.textViewHasil);
 
@@ -57,10 +61,18 @@ public class MainActivity extends AppCompatActivity {
             if (cbCuci.isChecked()) fasilitas += cbCuci.getText() + ", ";
             if (cbMakan.isChecked()) fasilitas += cbMakan.getText() + ". ";
 
+            String jk = null;
+
+            if (rgJK.getCheckedRadioButtonId() != -1) {
+                RadioButton rb = (RadioButton) findViewById(rgJK.getCheckedRadioButtonId());
+                jk = rb.getText().toString();
+            }
+
 
             tvHasil.setText(" Nama\t:\t" + nama + "\n Asal\t\t:\t"
                     + asal + "\n No. Telp.\t:\t" + telp
-                    + "\n\n Memesan kamar ukuran " + ukuran + fasilitas);
+                    + "\n\n Memesan kamar ukuran " + ukuran + fasilitas + "\n Untuk Kost "
+                    + jk + ".\n Data Anda telah kami terima, tunggu kabar selanjutnya untuk pembayaran. Terima Kasih.");
         }
 
     }
